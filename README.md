@@ -22,5 +22,5 @@ Features include.
 1. Make sure you're using the current version of Chrome or Firefox.
 2. Make sure you have JavaScript enabled in your web browser.
 
-  
+## If you have feedback, please don't hesitate. I'm always open to feedback.
   
