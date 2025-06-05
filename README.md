@@ -14,6 +14,7 @@ Features include.
 - Has a quiz to test your knowledge of the letters that sound different than in English or are not present in English.
 - Has a randomized feature to the quiz so you do not memorize the order.
 - One file for ease of use.
+- Has a dark mode light mode option for eye comfort.
 - Script made in HTML, CSS, and JavaScript for portable browser use. No installation required.
   - Just delete when you're done. No installation. To clog up your system.
 
