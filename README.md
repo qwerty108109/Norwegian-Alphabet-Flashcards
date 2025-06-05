@@ -10,6 +10,8 @@ Features include.
 - A randomization feature to randomize all the flash cards.
 - Only 29 flash carts to keep it simple.
 - Filters that allow you to filter out all the letters that only sound different than English language or not present in English language.
+- Filter out only the letters that are the same in the English language.
+- Added a quiz to test your knowledge of the letters that sound different than in English or are not present in English.
 - One file for ease of use.
 - Script made in HTML, CSS, and JavaScript for portable browser use. No installation required.
   - Just delete when you're done. No installation. To clog up your system.
