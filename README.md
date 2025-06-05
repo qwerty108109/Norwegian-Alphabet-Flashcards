@@ -2,7 +2,8 @@
 # Norwegian-Alphabet-Flashcards
 ## This is a flashcard app for learning the Norwegian alphabet.
 
-![image](https://github.com/user-attachments/assets/61839950-1d1d-4176-8310-2fdf8f101de4)
+![image](https://github.com/user-attachments/assets/47fbd157-0544-47ce-a545-0c63625c272a)
+
 
 
 Features include.
