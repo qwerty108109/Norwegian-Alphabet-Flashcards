@@ -25,6 +25,7 @@ Features include.
 2. Make sure you have JavaScript enabled in your web browser.
 
 ## Screenshots.
+### Flash card screen.
 ![image](https://github.com/user-attachments/assets/fd0c2166-bf97-449d-8113-02150ffaee83)
 
 ![image](https://github.com/user-attachments/assets/47fbd157-0544-47ce-a545-0c63625c272a)
