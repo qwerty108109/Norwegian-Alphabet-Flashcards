@@ -11,6 +11,7 @@ Features include.
 - Only 29 flash carts to keep it simple.
 - Script made in HTML, CSS, and JavaScript for portable browser use. No installation required.
   - Just delete when you're done. No installation. To clog up your system.
+- One file for ease of use.
 
 ## How to use.
 1. Download the index HTML file.
