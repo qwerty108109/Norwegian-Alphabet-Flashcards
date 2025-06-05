@@ -8,7 +8,7 @@ Features include.
 - 29 letters, including the standard 26 of the English alphabet plus Æ, Ø, and Å.
 - Reversible flashcards With letter pronunciation on the back.
 - A randomization feature to randomize all the flash cards.
-- Only 29 flash carts to keep it simple.
+- Only 29 flash cards to keep it simple.
 - Filters that allow you to filter out all the letters that only sound different than English language or not present in English language.
 - Filter out only the letters that are the same in the English language.
 - Has a quiz to test your knowledge of the letters that sound different than in English or are not present in English.
