@@ -17,5 +17,10 @@ Features include.
 2. Open the index HTML in Chrome or Firefox.
 3. Once launched, you can start using it immediately.
   - Make sure you have JavaScript enabled in your browser.
+
+## Troubleshooting.
+1. Make sure you're using the current version of Chrome or Firefox.
+2. Make sure you have JavaScript enabled in your web browser.
+
   
   
