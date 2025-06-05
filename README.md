@@ -29,7 +29,7 @@ Features include.
 ![image](https://github.com/user-attachments/assets/fd0c2166-bf97-449d-8113-02150ffaee83)
 ### Flash card screen and card count.
 ![image](https://github.com/user-attachments/assets/47fbd157-0544-47ce-a545-0c63625c272a)
-
+### Flash card screen and information about the language.
 ![image](https://github.com/user-attachments/assets/f3ac24b0-0648-4cf4-ac09-cdab0faef4fa)
 
 ![image](https://github.com/user-attachments/assets/5852c0e0-38d4-4e5e-96d0-75229020aa94)
