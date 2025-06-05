@@ -42,4 +42,5 @@ Features include.
 
 
 ## If you have feedback, please don't hesitate. I'm always open to feedback.
+Created with ❤️ for Norwegian learners
   
