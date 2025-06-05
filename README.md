@@ -2,15 +2,7 @@
 # Norwegian-Alphabet-Flashcards
 ## This is a flashcard app for learning the Norwegian alphabet.
 
-![image](https://github.com/user-attachments/assets/47fbd157-0544-47ce-a545-0c63625c272a)
-
-![image](https://github.com/user-attachments/assets/5852c0e0-38d4-4e5e-96d0-75229020aa94)
-
 ![image](https://github.com/user-attachments/assets/fd0c2166-bf97-449d-8113-02150ffaee83)
-
-![image](https://github.com/user-attachments/assets/f3ac24b0-0648-4cf4-ac09-cdab0faef4fa)
-
-
 
 Features include.
 - 29 letters, including the standard 26 of the English alphabet plus Æ, Ø, and Å.
