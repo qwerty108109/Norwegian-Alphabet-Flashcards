@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Norwegian Alphabet Flashcards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.8rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ffde59, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+
+        .app-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            max-width: 900px;
+            width: 100%;
+        }
+
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            width: 100%;
+        }
+
+        .filter-btn {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .filter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .filter-btn:active {
+            transform: translateY(1px);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(to right, #2ecc71, #27ae60);
+            box-shadow: 0 0 15px rgba(46, 204, 113, 0.5);
+        }
+
+        .flashcard-container {
+            perspective: 1000px;
+            width: 340px;
+            height: 440px;
+            margin: 1rem auto 2rem;
+        }
+
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.4, 0.2, 0.2, 1);
+            cursor: pointer;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+            border-radius: 20px;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .flashcard-front, .flashcard-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .flashcard-front {
+            background: linear-gradient(135deg, #2c3e50, #4a6491);
+            color: white;
+        }
+
+        .flashcard-back {
+            background: linear-gradient(135deg, #3498db, #1a5f9e);
+            color: white;
+            transform: rotateY(180deg);
+        }
+
+        .letter {
+            font-size: 11rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-family: 'Arial Rounded MT Bold', 'Arial', sans-serif;
+        }
+
+        .letter-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .example {
+            font-size: 1.8rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+
+        .translation {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            text-align: center;
+            font-style: italic;
+            margin-bottom: 0.5rem;
+        }
+
+        .pronunciation {
+            font-size: 1.2rem;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            margin-top: 0.5rem;
+        }
+
+        .hint {
+            position: absolute;
+            bottom: 1.5rem;
+            font-size: 1rem;
+            opacity: 0.8;
+            font-style: italic;
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: linear-gradient(to right, #3498db, #2c3e50);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .progress {
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            width: 100%;
+            max-width: 340px;
+        }
+
+        .alphabet-info {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            width: 100%;
+        }
+
+        .info-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #3498db;
+        }
+
+        .alphabet-facts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .fact {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .fact h3 {
+            margin-bottom: 0.5rem;
+            color: #3498db;
+        }
+
+        .fact p {
+            line-height: 1.6;
+        }
+
+        .footer {
+            margin-top: 2rem;
+            text-align: center;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 600px) {
+            .flashcard-container {
+                width: 300px;
+                height: 400px;
+            }
+            
+            .letter {
+                font-size: 9rem;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .filter-btn, .btn {
+                padding: 0.7rem 1.2rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Norwegian Alphabet Flashcards</h1>
+        <p class="subtitle">Learn the complete Norwegian alphabet with interactive flashcards. Click on a card to flip it and reveal the letter name, pronunciation, and example word.</p>
+    </header>
+    
+    <div class="app-container">
+        <div class="filter-section">
+            <button class="filter-btn" id="all-btn">
+                <i class="fas fa-globe"></i> All Letters
+            </button>
+            <button class="filter-btn" id="different-sounds-btn">
+                <i class="fas fa-volume-mute"></i> Different Sounds
+            </button>
+            <button class="filter-btn" id="same-name-btn">
+                <i class="fas fa-signature"></i> Same Name as English
+            </button>
+        </div>
+        
+        <div class="flashcard-container">
+            <div class="flashcard" id="flashcard">
+                <div class="flashcard-front">
+                    <div class="letter" id="letter">A</div>
+                    <div class="hint">Click to flip card</div>
+                </div>
+                <div class="flashcard-back">
+                    <div class="letter-name" id="letter-name">a</div>
+                    <div class="example" id="example">Eple</div>
+                    <div class="translation" id="translation">(Apple)</div>
+                    <div class="pronunciation" id="pronunciation">Pronounced: "ah"</div>
+                    <div class="hint">Click to flip back</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn" id="randomize">
+                <i class="fas fa-random"></i> Randomize
+            </button>
+            <button class="btn" id="prev">
+                <i class="fas fa-arrow-left"></i> Previous
+            </button>
+            <button class="btn" id="next">
+                Next <i class="fas fa-arrow-right"></i>
+            </button>
+            <button class="btn" id="flip">
+                <i class="fas fa-sync"></i> Flip Card
+            </button>
+        </div>
+        
+        <div class="progress" id="progress">Card 1 of 29</div>
+        
+        <div class="alphabet-info">
+            <h2 class="info-title">About the Norwegian Alphabet</h2>
+            <div class="alphabet-facts">
+                <div class="fact">
+                    <h3><i class="fas fa-star"></i> 29 Letters</h3>
+                    <p>The Norwegian alphabet has 29 letters, including the standard 26 of the English alphabet plus Æ, Ø, and Å.</p>
+                </div>
+                <div class="fact">
+                    <h3><i class="fas fa-language"></i> Unique Letters</h3>
+                    <p>Æ (æ), Ø (ø), and Å (å) are distinct letters in Norwegian, each appearing at the end of the alphabet.</p>
+                </div>
+                <div class="fact">
+                    <h3><i class="fas fa-volume-up"></i> Pronunciation</h3>
+                    <p>Norwegian pronunciation is largely phonetic, meaning words are pronounced as they're spelled. Some letters sound different than in English.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>Created with ❤️ for Norwegian learners | Flip the cards to discover the alphabet!</p>
+        </div>
+    </div>
+
+    <script>
+        // Norwegian alphabet data
+        const alphabet = [
+            { letter: "A", name: "ah", example: "Eple", translation: "Apple", 
+              pronunciation: "Pronounced: 'ah'", differentSound: true, sameName: false },
+            { letter: "B", name: "beh", example: "Bil", translation: "Car", 
+              pronunciation: "Pronounced: 'beh'", differentSound: false, sameName: false },
+            { letter: "C", name: "seh", example: "Cykel", translation: "Bicycle", 
+              pronunciation: "Pronounced: 'seh'", differentSound: true, sameName: false },
+            { letter: "D", name: "deh", example: "Dør", translation: "Door", 
+              pronunciation: "Pronounced: 'deh'", differentSound: false, sameName: false },
+            { letter: "E", name: "eh", example: "Elg", translation: "Moose", 
+              pronunciation: "Pronounced: 'eh'", differentSound: true, sameName: false },
+            { letter: "F", name: "eff", example: "Fisk", translation: "Fish", 
+              pronunciation: "Pronounced: 'eff'", differentSound: false, sameName: true },
+            { letter: "G", name: "geh", example: "Gul", translation: "Yellow", 
+              pronunciation: "Pronounced: 'geh'", differentSound: false, sameName: false },
+            { letter: "H", name: "haw", example: "Hus", translation: "House", 
+              pronunciation: "Pronounced: 'haw'", differentSound: true, sameName: false },
+            { letter: "I", name: "ee", example: "Is", translation: "Ice", 
+              pronunciation: "Pronounced: 'ee'", differentSound: true, sameName: false },
+            { letter: "J", name: "yaw", example: "Jul", translation: "Christmas", 
+              pronunciation: "Pronounced: 'yaw'", differentSound: true, sameName: false },
+            { letter: "K", name: "kaw", example: "Katt", translation: "Cat", 
+              pronunciation: "Pronounced: 'kaw'", differentSound: false, sameName: false },
+            { letter: "L", name: "ell", example: "Lampe", translation: "Lamp", 
+              pronunciation: "Pronounced: 'ell'", differentSound: false, sameName: true },
+            { letter: "M", name: "emm", example: "Måne", translation: "Moon", 
+              pronunciation: "Pronounced: 'emm'", differentSound: false, sameName: true },
+            { letter: "N", name: "enn", example: "Natt", translation: "Night", 
+              pronunciation: "Pronounced: 'enn'", differentSound: false, sameName: false },
+            { letter: "O", name: "oh", example: "Ost", translation: "Cheese", 
+              pronunciation: "Pronounced: 'oh'", differentSound: true, sameName: false },
+            { letter: "P", name: "peh", example: "Papegøye", translation: "Parrot", 
+              pronunciation: "Pronounced: 'peh'", differentSound: false, sameName: false },
+            { letter: "Q", name: "kew", example: "Quiz", translation: "Quiz", 
+              pronunciation: "Pronounced: 'kew'", differentSound: true, sameName: false },
+            { letter: "R", name: "err", example: "Rose", translation: "Rose", 
+              pronunciation: "Pronounced: 'err'", differentSound: true, sameName: false },
+            { letter: "S", name: "ess", example: "Sol", translation: "Sun", 
+              pronunciation: "Pronounced: 'ess'", differentSound: false, sameName: true },
+            { letter: "T", name: "teh", example: "Tre", translation: "Tree", 
+              pronunciation: "Pronounced: 'teh'", differentSound: false, sameName: false },
+            { letter: "U", name: "ew", example: "Ugle", translation: "Owl", 
+              pronunciation: "Pronounced: 'ew'", differentSound: true, sameName: false },
+            { letter: "V", name: "veh", example: "Vann", translation: "Water", 
+              pronunciation: "Pronounced: 'veh'", differentSound: false, sameName: false },
+            { letter: "W", name: "dobbelt-ve", example: "Whisky", translation: "Whisky", 
+              pronunciation: "Pronounced: 'dobbelt-ve'", differentSound: true, sameName: false },
+            { letter: "X", name: "eks", example: "Xylofon", translation: "Xylophone", 
+              pronunciation: "Pronounced: 'eks'", differentSound: true, sameName: false },
+            { letter: "Y", name: "ew", example: "Yoghurt", translation: "Yogurt", 
+              pronunciation: "Pronounced: 'ew'", differentSound: true, sameName: false },
+            { letter: "Z", name: "zett", example: "Zoo", translation: "Zoo", 
+              pronunciation: "Pronounced: 'zett'", differentSound: true, sameName: false },
+            { letter: "Æ", name: "ae", example: "Ærlig", translation: "Honest", 
+              pronunciation: "Pronounced: 'ae'", differentSound: true, sameName: false },
+            { letter: "Ø", name: "oe", example: "Øl", translation: "Beer", 
+              pronunciation: "Pronounced: 'oe'", differentSound: true, sameName: false },
+            { letter: "Å", name: "aw", example: "Ål", translation: "Eel", 
+              pronunciation: "Pronounced: 'aw'", differentSound: true, sameName: false }
+        ];
+
+        // DOM elements
+        const flashcard = document.getElementById('flashcard');
+        const letterElement = document.getElementById('letter');
+        const letterNameElement = document.getElementById('letter-name');
+        const exampleElement = document.getElementById('example');
+        const translationElement = document.getElementById('translation');
+        const pronunciationElement = document.getElementById('pronunciation');
+        const progressElement = document.getElementById('progress');
+        const randomizeBtn = document.getElementById('randomize');
+        const prevBtn = document.getElementById('prev');
+        const nextBtn = document.getElementById('next');
+        const flipBtn = document.getElementById('flip');
+        const allBtn = document.getElementById('all-btn');
+        const differentSoundsBtn = document.getElementById('different-sounds-btn');
+        const sameNameBtn = document.getElementById('same-name-btn');
+
+        // State variables
+        let currentIndex = 0;
+        let currentDeck = [...alphabet];
+        let isFlipped = false;
+        let activeFilter = "all";
+
+        // Initialize the app
+        function init() {
+            updateCard();
+            addEventListeners();
+            // Set all button as active initially
+            allBtn.classList.add('active');
+        }
+
+        // Add event listeners
+        function addEventListeners() {
+            flashcard.addEventListener('click', flipCard);
+            randomizeBtn.addEventListener('click', shuffleDeck);
+            prevBtn.addEventListener('click', showPrevCard);
+            nextBtn.addEventListener('click', showNextCard);
+            flipBtn.addEventListener('click', flipCard);
+            
+            // Filter buttons
+            allBtn.addEventListener('click', () => applyFilter("all"));
+            differentSoundsBtn.addEventListener('click', () => applyFilter("different"));
+            sameNameBtn.addEventListener('click', () => applyFilter("same"));
+        }
+
+        // Update the card display
+        function updateCard() {
+            if (currentDeck.length === 0) {
+                // Handle case when filter returns no cards
+                letterElement.textContent = "Ø";
+                letterNameElement.textContent = "No Cards";
+                exampleElement.textContent = "Try a different filter";
+                translationElement.textContent = "";
+                pronunciationElement.textContent = "";
+                progressElement.textContent = "0 cards in current filter";
+                return;
+            }
+            
+            const currentCard = currentDeck[currentIndex];
+            
+            letterElement.textContent = currentCard.letter;
+            letterNameElement.textContent = currentCard.name;
+            exampleElement.textContent = currentCard.example;
+            translationElement.textContent = `(${currentCard.translation})`;
+            pronunciationElement.textContent = currentCard.pronunciation;
+            
+            progressElement.textContent = `Card ${currentIndex + 1} of ${currentDeck.length}`;
+            
+            // Reset flip state
+            if (isFlipped) {
+                flashcard.classList.add('flipped');
+            } else {
+                flashcard.classList.remove('flipped');
+            }
+        }
+
+        // Flip the card
+        function flipCard() {
+            if (currentDeck.length === 0) return;
+            
+            isFlipped = !isFlipped;
+            flashcard.classList.toggle('flipped');
+        }
+
+        // Show next card
+        function showNextCard() {
+            if (currentDeck.length === 0) return;
+            
+            currentIndex = (currentIndex + 1) % currentDeck.length;
+            isFlipped = false;
+            updateCard();
+        }
+
+        // Show previous card
+        function showPrevCard() {
+            if (currentDeck.length === 0) return;
+            
+            currentIndex = (currentIndex - 1 + currentDeck.length) % currentDeck.length;
+            isFlipped = false;
+            updateCard();
+        }
+
+        // Shuffle the deck
+        function shuffleDeck() {
+            if (currentDeck.length === 0) return;
+            
+            // Fisher-Yates shuffle algorithm
+            for (let i = currentDeck.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentDeck[i], currentDeck[j]] = [currentDeck[j], currentDeck[i]];
+            }
+            
+            currentIndex = 0;
+            isFlipped = false;
+            updateCard();
+        }
+
+        // Apply filter to the deck
+        function applyFilter(filterType) {
+            // Update active button styling
+            allBtn.classList.remove('active');
+            differentSoundsBtn.classList.remove('active');
+            sameNameBtn.classList.remove('active');
+            
+            activeFilter = filterType;
+            
+            switch(filterType) {
+                case "all":
+                    currentDeck = [...alphabet];
+                    allBtn.classList.add('active');
+                    break;
+                case "different":
+                    currentDeck = alphabet.filter(card => card.differentSound);
+                    differentSoundsBtn.classList.add('active');
+                    break;
+                case "same":
+                    currentDeck = alphabet.filter(card => card.sameName);
+                    sameNameBtn.classList.add('active');
+                    break;
+            }
+            
+            currentIndex = 0;
+            isFlipped = false;
+            updateCard();
+        }
+
+        // Initialize the app when the page loads
+        window.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>
