@@ -16,7 +16,7 @@ Features include.
 - Has a dark mode light mode option for eye comfort.
 - One file for ease of use.
 - Script made in HTML, CSS, and JavaScript for portable browser use. No installation required.
-  - Just delete when you're done. No installation. To clog up your system.
+  - Just delete when you're done. No installation to clog up your system.
 
 
 ## How to use.
